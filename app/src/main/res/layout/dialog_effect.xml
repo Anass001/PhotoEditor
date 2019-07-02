@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="30dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:tint="@color/grey"
+            android:src="@drawable/ic_sun"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/brightness_bar"
+            android:theme="@style/AppTheme"
+            android:progress="100"
+            android:max="200"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:padding="3dp"
+            android:layout_width="24dp"
+            android:tint="@color/grey"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_contrast"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:progress="0"
+            android:max="200"
+            android:theme="@style/AppTheme"
+            android:id="@+id/contrast_bar"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:padding="3dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:tint="@color/grey"
+            android:src="@drawable/ic_drop_silhouette"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:progress="100"
+            android:theme="@style/AppTheme"
+            android:max="300"
+            android:id="@+id/saturation_bar"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

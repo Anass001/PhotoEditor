@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:textColor="@android:color/darker_gray"
+        android:id="@+id/filter_name"
+        android:text="Filter Name"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:id="@+id/frame"
+        android:background="@drawable/bg_filter_selected">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/filter_thumb"
+            android:scaleType="centerCrop" />
+
+    </FrameLayout>
+
+</LinearLayout>

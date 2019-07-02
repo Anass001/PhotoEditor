@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/lightGrey"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Add Text"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:id="@+id/textInput"
+            android:textColor="@android:color/black"
+            android:theme="@style/AppTheme"
+            android:textColorHint="@android:color/darker_gray"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/color_lt"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Text Color"
+                        android:layout_gravity="left"
+                        android:textSize="18sp"
+                        android:textColor="@color/grey"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/color_list"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/font_lt"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Text Font"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:textSize="18sp"
+                        android:textColor="@color/grey"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/font_list"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/cancel"
+                android:textSize="18sp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/grey"
+                android:paddingStart="10dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:textSize="18sp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingBottom="3.5dp"
+                android:paddingTop="3.5dp"
+                android:id="@+id/done"
+                android:background="@drawable/bg_done_btn"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

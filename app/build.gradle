@@ -1,0 +1,34 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.zeneo.photoeditorpro"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    implementation "com.mlsdev.animatedrv:library:1.0.1"
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'ja.burhanrashid52:photoeditor:0.4.0'
+    implementation 'info.androidhive:imagefilters:1.0.7'
+    implementation 'com.github.yalantis:ucrop:2.2.3'
+}

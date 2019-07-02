@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.CropFragment">
+
+    <com.yalantis.ucrop.view.UCropView
+        android:id="@+id/ucrop"
+        android:layout_above="@+id/tools_container"
+        android:background="@android:color/black"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tools_container"
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/scale_lt"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="80%"
+                    android:id="@+id/scale_preview"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@android:color/black"/>
+
+                <com.yalantis.ucrop.view.widget.HorizontalProgressWheelView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:id="@+id/seek_scale"
+                    android:layout_marginBottom="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/rotate_lt"
+                android:visibility="invisible"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:layout_weight="0"
+
+                    android:id="@+id/reset_rotation"
+                    android:src="@drawable/ic_reset"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10.1°"
+                        android:textSize="15sp"
+                        android:id="@+id/degree_preview"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@android:color/black"/>
+
+                    <com.yalantis.ucrop.view.widget.HorizontalProgressWheelView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/seek_angle"
+                        android:layout_marginBottom="15dp"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="3dp"
+                    android:id="@+id/rotate_90"
+                    android:src="@drawable/ic_rotate_90"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:visibility="invisible"
+                android:id="@+id/ratio_lt"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ratio_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/simple_shadow"
+            />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            android:elevation="10dp"
+            android:layout_alignParentBottom="true"
+            app:tabMode="fixed"
+            app:tabMaxWidth="0dp"
+            app:tabTextColor="@android:color/white"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabPaddingStart="20dp"
+            app:tabPaddingEnd="20dp">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:icon="@drawable/ic_resize"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:icon="@drawable/ic_rotate"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:icon="@drawable/ic_crop"/>
+
+        </android.support.design.widget.TabLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
