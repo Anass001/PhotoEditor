@@ -253,7 +253,7 @@ public class CropFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
         List<AspectRatio> list = new ArrayList<>();
-        list.add(new AspectRatio("Original",1,1));
+        list.add(new AspectRatio("Original",bitmap.getWidth(),bitmap.getHeight()));
         list.add(new AspectRatio("2 : 3",2,3));
         list.add(new AspectRatio("3 : 4",3,4));
         list.add(new AspectRatio("3 : 5",3,5));
@@ -272,6 +272,8 @@ public class CropFragment extends Fragment {
                 setAspectRatio(width,hight);
             }
         });
+
+        adapter.setupSelectedList();
 
         recyclerView.setAdapter(adapter);
 
@@ -338,8 +340,4 @@ public class CropFragment extends Fragment {
         inputPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "tempor", null);
         return Uri.parse(inputPath);
     }
-
-
-
-
 }

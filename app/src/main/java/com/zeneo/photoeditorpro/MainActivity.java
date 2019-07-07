@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.FileUriExposedException;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -27,7 +26,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -38,18 +41,25 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     String currentPhotoPath;
-
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MobileAds.initialize(this, getResources().getString(R.string.APP_ID));
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.MAIN_AD_UNIT_ID));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         LinearLayout gal_lt = findViewById(R.id.gal_lt);
         gal_lt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
                 Intent intent = new Intent(getApplicationContext(),GalleryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -59,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.gal_ripple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
                 Intent intent = new Intent(getApplicationContext(),GalleryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -69,23 +82,30 @@ public class MainActivity extends AppCompatActivity {
         more_lt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+//                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
+//                Intent i = new Intent(Intent.ACTION_VIEW);
+//                i.setData(Uri.parse(url));
+//                startActivity(i);
 
-                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
 
         findViewById(R.id.more_rip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+//                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
+//                Intent i = new Intent(Intent.ACTION_VIEW);
+//                i.setData(Uri.parse(url));
+//                startActivity(i);
 
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
 
@@ -94,7 +114,12 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener camClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
                 dispatchTakePictureIntent();
+//                Toast.makeText(MainActivity.this, "Camera", Toast.LENGTH_LONG).show();
+
             }
         };
 
@@ -120,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.cam_txt)).setTypeface(typeface);
         ((TextView)findViewById(R.id.more_txt)).setTypeface(typeface);
         ((TextView)findViewById(R.id.gal_txt)).setTypeface(typeface);
-        ((TextView)findViewById(R.id.title)).setTypeface(typeface2);
+//        ((TextView)findViewById(R.id.title)).setTypeface(typeface2);
     }
 
     public void linkIconsView (){

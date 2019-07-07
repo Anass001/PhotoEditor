@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.SeekBar;
 import com.zeneo.photoeditorpro.EditActivity;
 import com.zeneo.photoeditorpro.R;
@@ -29,14 +30,28 @@ public class EffectDialog extends BottomSheetDialogFragment {
 
     }
 
+    float Contrast;
+    int BrightNess;
+    float Saturation;
+
+    public void initAttrs(float contrast, int brightNess, float saturation){
+
+        Contrast = contrast;
+        BrightNess = brightNess;
+        Saturation = saturation;
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.dialog_effect,container,false);
-        float Contrast = ((EditActivity)getContext()).getFinalContrast();
-        int BrightNess = ((EditActivity)getContext()).getFinalBrightness();
-        float Saturation = ((EditActivity)getContext()).getFinalSaturation();
+        Contrast = ((EditActivity)getContext()).getFinalContrast();
+        BrightNess = ((EditActivity)getContext()).getFinalBrightness();
+        Saturation = ((EditActivity)getContext()).getFinalSaturation();
+
+        getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         SeekBar brightnessProgress = view.findViewById(R.id.brightness_bar);
         brightnessProgress.setProgress(BrightNess);

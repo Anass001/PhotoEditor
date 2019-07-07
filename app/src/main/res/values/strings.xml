@@ -1,5 +1,68 @@
 <resources>
-    <string name="app_name">My Application</string>
-
+    <string name="app_name">P Photo Editor</string>
+    <string name="APP_ID">ca-app-pub-4577547346540393~8638396638</string>
+    <string name="MAIN_AD_UNIT_ID">ca-app-pub-4577547346540393/9666168153</string>
+    <string name="EDIT_AD_UNIT_ID">ca-app-pub-4577547346540393/4374313024</string>
+    <string name="about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="credits_icons">
+        <a href="https://www.flaticon.com/authors/daniel-bruce" title="Daniel Bruce">Daniel Bruce</a>
+\n
+<a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a>
+\n
+<a href="https://www.flaticon.com/authors/chanut" title="Chanut">Chanut</a>
+\n
+<a href="https://www.flaticon.com/authors/srip" title="srip">srip</a>
+\n
+<a href="https://www.flaticon.com/authors/epiccoders" title="EpicCoders">EpicCoders</a>
+\n
+<a href="https://www.flaticon.com/authors/hadrien" title="Hadrien">Hadrien</a>
+\n
+<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
+\n
+<a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a>
+\n
+<a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a>
+\n
+<a href="https://www.flaticon.com/authors/google" title="Google">Google</a>
+\n
+<a href="https://www.flaticon.com/authors/smartline" title="Smartline">Smartline</a>
+\n
+<a href="https://www.freepik.com/" title="Freepik">Freepik</a>
+\n
+from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+\n
+<a href="https://material.io/tools/icons/?style=baseline" title="Material Design">Material Design</a> from <a href="https://www.google.com/" title="Google">Google</a>
+    </string>
+    <string name="credits_fonts">
+        <a href="https://github.com/JulietaUla/Montserrat" title="Montserrat">Montserrat</a> by Julieta Ulanovsky
+\n
+<a href="https://fonts.google.com/specimen/Aguafina+Script" title="Aguafina Script">Aguafina Script</a> by Sudtipos
+\n
+<a href="https://github.com/polarsys/b612" title="B612 Mono">B612 Mono</a> by <a href="https://www.airbus.com/" title="Airbus">Airbus</a>
+\n
+<a href="https://fonts.google.com/specimen/Merienda" title="Merienda">Merienda</a> by Eduardo Tunni
+\n
+<a href="https://github.com/EbenSorkin/Merriweather" title="Merriweather">Merriweather</a> by Sorkin Type
+\n
+<a href="https://github.com/google/roboto/" title="Roboto">Roboto</a> by Christian Robertson
+\n
+<a href="https://fonts.google.com/specimen/Russo+One" title="Russo One">Russo One</a> by Jovanny Lemonad
+\n
+<a href="https://fonts.google.com/specimen/Swanky+and+Moo+Moo" title="Swanky and Moo Moo">Swanky and Moo Moo</a> by Kimberly Geswein
+\n
+<a href="https://fonts.google.com/specimen/Teko" title="Teko">Teko</a> by Indian Type Foundry
+\n
+all licensed by <a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL_web" title="SIL Open Font License">SIL Open Font License</a>
+        \n
+        <a href="https://fonts.google.com/specimen/Zilla+Slab" title="Zilla Slab">Zilla Slab</a> by Typotheque
+        \n
+        <a href="https://fonts.google.com/specimen/Vollkorn" title="Vollkorn">Vollkorn</a> by Friedrich Althausen
+    </string>
+    <string name="credits_stickers">
+        <a href="https://www.flaticon.com/authors/twitter" title="Twitter">Twitter</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+\n
+<a href="https://www.freepik.com/" title="Freepik">Freepik</a>
+        \n
+    </string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

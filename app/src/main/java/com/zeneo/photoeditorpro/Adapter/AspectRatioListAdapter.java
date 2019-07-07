@@ -13,6 +13,7 @@ import com.zeneo.photoeditorpro.EditActivity;
 import com.zeneo.photoeditorpro.Model.AspectRatio;
 import com.zeneo.photoeditorpro.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AspectRatioListAdapter extends RecyclerView.Adapter<AspectRatioListAdapter.ViewHolder> {
@@ -21,9 +22,26 @@ public class AspectRatioListAdapter extends RecyclerView.Adapter<AspectRatioList
     private Context context;
     private int lastItemPosition = -1;
     ViewHolder mViewHolder;
+    private List<Boolean> selectedList;
 
     public interface OnItemSelectedListener {
         void onItemSelected(int hight , int width);
+    }
+
+    public List<Boolean> setupSelectedList(){
+
+        selectedList = new ArrayList<>();
+        for (int i = 0 ; i < list.size() ; i++ ){
+
+            if (i==0)
+                selectedList.add(true);
+            else
+                selectedList.add(false);
+
+        }
+
+        return selectedList;
+
     }
 
     OnItemSelectedListener itemSelectedListener;
@@ -48,28 +66,36 @@ public class AspectRatioListAdapter extends RecyclerView.Adapter<AspectRatioList
 
         viewHolder.textView.setText(list.get(i).getName());
 
-        if(i==0){
+        if(selectedList.get(i)){
             viewHolder.view.setVisibility(View.VISIBLE);
-            mViewHolder = viewHolder;
+        }else {
+            viewHolder.view.setVisibility(View.INVISIBLE);
+
         }
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.view.setVisibility(View.VISIBLE);
 
-                if(mViewHolder!=null){
-                    if(mViewHolder != viewHolder){
-                        mViewHolder.view.setVisibility(View.INVISIBLE);
-                        itemSelectedListener.onItemSelected(list.get(i).getHight(),list.get(i).getWidth());
-                    }
-                }
-                mViewHolder = viewHolder;
+                itemSelectedListener.onItemSelected(list.get(i).getHight(),list.get(i).getWidth());
+                setSelectedItem(i);
 
             }
         });
 
 
+
+    }
+
+    public void setSelectedItem(int i){
+
+        try {
+            selectedList.set(selectedList.indexOf(true),false);
+            selectedList.set(i,true);
+            notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

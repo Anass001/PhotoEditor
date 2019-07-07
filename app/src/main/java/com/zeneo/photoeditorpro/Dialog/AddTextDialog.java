@@ -208,10 +208,10 @@ public class AddTextDialog extends BottomSheetDialogFragment {
         list.add("fonts/Montserrat-Regular.ttf");
         list.add("fonts/RobotoMono-Regular.ttf");
         list.add("fonts/RussoOne-Regular.ttf");
-        list.add("fonts/Selfie_Regular.otf");
         list.add("fonts/SwankyandMooMoo.ttf");
         list.add("fonts/Teko-Regular.ttf");
-
+        list.add("fonts/Vollkorn-Regular.ttf");
+        list.add("fonts/ZillaSlab-Regular.ttf");
         return list;
     }
 

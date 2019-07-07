@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import com.zeneo.photoeditorpro.Adapter.StickersListAdapter;
 import com.zeneo.photoeditorpro.Dialog.StrickersDialog;
 import com.zeneo.photoeditorpro.R;
-import com.zeneo.photoeditorpro.Stickers;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,19 +67,22 @@ public class StickersFragment extends Fragment {
                 stickersList.clear();
                 listAssetsFiles("summer");
 
-            } else if (category.equals("Tab3")){
-//                stickersList.clear();
+            } else if (category.equals("Text")){
+                stickersList.clear();
+                listAssetsFiles("text");
 
-            } else if (category.equals("Tab4")){
-//                stickersList.clear();
-
-            } else if (category.equals("Tab5")){
-//                stickersList.clear();
-
-            } else if (category.equals("Tab6")){
-//                stickersList.clear();
+            } else if (category.equals("Love")){
+                stickersList.clear();
+                listAssetsFiles("love");
 
             }
+//            else if (category.equals("Tab5")){
+////                stickersList.clear();
+//
+//            } else if (category.equals("Tab6")){
+////                stickersList.clear();
+//
+//            }
         }
         return stickersList;
     }

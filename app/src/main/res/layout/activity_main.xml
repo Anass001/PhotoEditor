@@ -6,21 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_main"
     android:clipChildren="false"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:theme="@style/MainPageTheme">
 
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="40dp"
-        android:gravity="center"
-        android:textSize="35sp"
-        android:textColor="@android:color/white"
-        android:id="@+id/title"
-        android:fontFamily="@font/montserrat"
-        android:text="Z E N E O P I C"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:paddingBottom="40dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="35sp"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:id="@+id/title"-->
+        <!--android:fontFamily="@font/montserrat"-->
+        <!--android:text="Z E N E O P I C"/>-->
 
 
     <LinearLayout
@@ -29,12 +30,57 @@
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:clipChildren="false"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:id="@+id/cam_lt"
+            android:gravity="center"
+            android:clipChildren="false"
+            android:layout_weight="1"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleRoundedCorners="35dp"
+                app:mrl_rippleColor="#8F574CB1"
+                android:id="@+id/cam_rip"
+                android:clipChildren="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/bg_circle_white"
+                    android:padding="20dp"
+                    android:id="@+id/cam_img"
+                    android:translationZ="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_dre"/>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/cam_txt"
+                android:clipToPadding="false"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/white"
+                android:text="CAMERA"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical"
             android:gravity="center"
             android:id="@+id/gal_lt"
@@ -53,63 +99,18 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:background="@drawable/bg_circle_white"
                     android:padding="20dp"
                     android:id="@+id/gal_img"
                     android:translationZ="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_gallery"/>
+                    android:src="@drawable/ic_gallerya"/>
 
             </com.balysv.materialripple.MaterialRippleLayout>
 
 
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@android:color/white"
-                android:text="GALLERY"
-                android:id="@+id/gal_txt"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="vertical"
-            android:id="@+id/cam_lt"
-            android:gravity="center"
-            android:clipChildren="false"
-            android:layout_weight="1"
-            >
-
-            <com.balysv.materialripple.MaterialRippleLayout
-                app:mrl_rippleOverlay="true"
-                app:mrl_rippleRoundedCorners="35dp"
-                app:mrl_rippleColor="#8F574CB1"
-                android:id="@+id/cam_rip"
-                android:clipChildren="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_circle_white"
-                    android:padding="20dp"
-                    android:id="@+id/cam_img"
-                    android:translationZ="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_camera"/>
-
-            </com.balysv.materialripple.MaterialRippleLayout>
 
 
 
@@ -117,18 +118,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:id="@+id/cam_txt"
-                android:clipToPadding="false"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@android:color/white"
-                android:text="CAMERA"/>
+                android:text="GALLERY"
+                android:id="@+id/gal_txt"/>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="20dp"
             android:id="@+id/more_lt"
             android:clipChildren="false"
             android:orientation="vertical"
@@ -146,14 +148,14 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:background="@drawable/bg_circle_white"
                     android:padding="20dp"
                     android:translationZ="10dp"
                     android:id="@+id/more_img"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_more"/>
+                    android:src="@drawable/ic_info"/>
 
             </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -162,11 +164,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/montserrat"
                 android:id="@+id/more_txt"
                 android:textColor="@android:color/white"
-                android:text="MORE"/>
+                android:text="ABOUT"/>
 
         </LinearLayout>
 

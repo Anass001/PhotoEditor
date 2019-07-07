@@ -32,6 +32,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.zeneo.photoeditorpro.Dialog.AddTextDialog;
 import com.zeneo.photoeditorpro.Dialog.BrushDialog;
 import com.zeneo.photoeditorpro.Dialog.EffectDialog;
@@ -53,6 +56,7 @@ import java.util.Calendar;
 import ja.burhanrashid52.photoeditor.OnSaveBitmap;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
+import ja.burhanrashid52.photoeditor.SaveSettings;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -60,8 +64,12 @@ public class EditActivity extends AppCompatActivity {
     FrameLayout cropContainer;
     EditToolsFragment fragment;
     CropFragment cropFragment;
+    FilterDialog dialog;
+    EffectDialog effectDialog;
+
     String fontPath;
     String textColor;
+    Bitmap bitmap;
 
     int brushOpacity = 100;
     int selectedFilterIndex = 0;
@@ -98,6 +106,7 @@ public class EditActivity extends AppCompatActivity {
     boolean isInCrop = false;
 
     Filter cFilter = new Filter();
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,40 +117,116 @@ public class EditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.EDIT_AD_UNIT_ID));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         photoEditorView = findViewById(R.id.photoEditor);
         photoEditor = new PhotoEditor.Builder(getApplicationContext(), photoEditorView).build();
 
         String path = getIntent().getStringExtra("path");
-        final Bitmap[] bitmap = {setupBitmapSize(BitmapFactory.decodeFile(path))};
+        bitmap = setupBitmapSize(BitmapFactory.decodeFile(path));
 
 
         fragmentContainer = findViewById(R.id.fragmentsContainer);
         cropContainer = findViewById(R.id.crop_container);
 
-        photoEditorView.getSource().setImageBitmap(bitmap[0]);
+        photoEditorView.getSource().setImageBitmap(bitmap);
 
-        final FilterDialog dialog = new FilterDialog();
-        dialog.setBitmap(bitmap[0]);
-        dialog.setIndex(selectedFilterIndex);
-        dialog.setListener(new FilterDialog.OnFilterChangeListener() {
+        setupFilter();
+        setupEffect();
+
+        findViewById(R.id.filter_lt).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFilterSelected(Filter filter,int index) {
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+                dialog.show(getSupportFragmentManager(), "Filter");
 
-                finalBitmap = bitmap[0];
-                selectedFilterIndex = index;
-                dialog.setIndex(selectedFilterIndex);
-                cFilter = filter;
-//                dialog.dismiss();
-                finalContrast = 0;
-                finalSaturation = 100;
-                finalBrightness = 100;
-                photoEditorView.getSource().setImageBitmap(cFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
+            }
+        });
+
+        findViewById(R.id.effect_lt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+                effectDialog.initAttrs(finalContrast,finalBrightness,finalSaturation);
+                effectDialog.show(getSupportFragmentManager(), "Effect");
+            }
+        });
+
+        findViewById(R.id.edit_lt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+                isInTools = true;
+                fragment = new EditToolsFragment();
+                fragment.setListenner(listenner);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmentsContainer, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                fragmentContainer.setVisibility(View.VISIBLE);
+                findViewById(R.id.tools).setVisibility(View.INVISIBLE);
+            }
+        });
+
+        findViewById(R.id.crop_lt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+                cropFragment = new CropFragment();
+
+                photoEditor.saveAsBitmap(new OnSaveBitmap() {
+                    @Override
+                    public void onBitmapReady(Bitmap saveBitmap) {
+                        isInCrop = true;
+                        cropFragment.setBitmap(saveBitmap);
+                        cropFragment.setListener(new CropFragment.OnCropSaveListener() {
+                            @Override
+                            public void onSave(Uri uri) {
+                                photoEditorView.getSource().setImageURI(uri);
+                                bitmap = BitmapFactory.decodeFile(uri.getPath());
+                                new File(uri.getPath()).delete();
+                                closeCropFragment();
+                            }
+                        });
+                        cropFragment.setInCrop(isInCrop);
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.replace(R.id.crop_container, cropFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        findViewById(R.id.bottombar).setVisibility(View.GONE);
+                        findViewById(R.id.sd).setVisibility(View.GONE);
+                        photoEditorView.setVisibility(View.GONE);
+                        cropContainer.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+
+                    }
+                });
 
 
             }
         });
 
-        final EffectDialog effectDialog = new EffectDialog();
+    }
+
+    public void setupEffect(){
+
+        effectDialog = new EffectDialog();
+        effectDialog.initAttrs(finalContrast,finalBrightness,finalSaturation);
         effectDialog.setListener(new EffectDialog.OnFilterChangeListener() {
             @Override
             public void onBrightnessChanged(int value) {
@@ -161,7 +246,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onFiltreComplet() {
 
-                finalBitmap = bitmap[0];
+                finalBitmap = bitmap;
 
                 ContrastSubFilter contrastSubFilter = new ContrastSubFilter(finalContrast / 100 + 1);
                 contrastSubFilter.setTag("contrast");
@@ -181,72 +266,27 @@ public class EditActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.filter_lt).setOnClickListener(new View.OnClickListener() {
+    }
+
+    public void setupFilter(){
+
+        dialog = new FilterDialog();
+        dialog.setBitmap(bitmap);
+        dialog.setIndex(selectedFilterIndex);
+        dialog.setupSelectedFilter(ThumbnailsManager.processThumbs(getApplicationContext()));
+        dialog.setListener(new FilterDialog.OnFilterChangeListener() {
             @Override
-            public void onClick(View v) {
-                dialog.show(getSupportFragmentManager(), "Filter");
+            public void onFilterSelected(Filter filter,int index) {
 
-            }
-        });
-
-        findViewById(R.id.effect_lt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                effectDialog.show(getSupportFragmentManager(), "Effect");
-            }
-        });
-
-        findViewById(R.id.edit_lt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isInTools = true;
-                fragment = new EditToolsFragment();
-                fragment.setListenner(listenner);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragmentsContainer, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                fragmentContainer.setVisibility(View.VISIBLE);
-                findViewById(R.id.tools).setVisibility(View.INVISIBLE);
-            }
-        });
-
-        findViewById(R.id.crop_lt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cropFragment = new CropFragment();
-
-                photoEditor.saveAsBitmap(new OnSaveBitmap() {
-                    @Override
-                    public void onBitmapReady(Bitmap saveBitmap) {
-                        isInCrop = true;
-                        cropFragment.setBitmap(saveBitmap);
-                        cropFragment.setListener(new CropFragment.OnCropSaveListener() {
-                            @Override
-                            public void onSave(Uri uri) {
-                                photoEditorView.getSource().setImageURI(uri);
-                                bitmap[0] = BitmapFactory.decodeFile(uri.getPath());
-                                new File(uri.getPath()).delete();
-                                closeCropFragment();
-                            }
-                        });
-                        cropFragment.setInCrop(isInCrop);
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.crop_container, cropFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                        findViewById(R.id.bottombar).setVisibility(View.GONE);
-                        photoEditorView.setVisibility(View.GONE);
-                        cropContainer.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-
-                    }
-                });
+                finalBitmap = bitmap;
+                selectedFilterIndex = index;
+                dialog.setIndex(selectedFilterIndex);
+                cFilter = filter;
+//                dialog.dismiss();
+                finalContrast = 0;
+                finalSaturation = 100;
+                finalBrightness = 100;
+                photoEditorView.getSource().setImageBitmap(cFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
 
 
             }
@@ -262,6 +302,9 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void addText() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
 
         final AddTextDialog textDialog = new AddTextDialog();
         final AddTextDialog.OnTextSettingsChangedListener listener;
@@ -330,16 +373,26 @@ public class EditActivity extends AppCompatActivity {
 
         @Override
         public void onBrushSelected() {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
             switchToBrush();
         }
 
         @Override
         public void onEraserSlected() {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+
             switchToEraser();
         }
 
         @Override
         public void onStickerSelected() {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
             addStickers();
         }
     };
@@ -347,7 +400,6 @@ public class EditActivity extends AppCompatActivity {
     public void addStickers() {
 
         final StrickersDialog dialog = new StrickersDialog();
-
         dialog.setListener(new StrickersDialog.OnStickerAddListener() {
             @Override
             public void onStickerAdded(String path) {
@@ -370,7 +422,6 @@ public class EditActivity extends AppCompatActivity {
     public void switchToBrush() {
 
         final BrushDialog brushDialog = new BrushDialog();
-
 
         photoEditor.setBrushDrawingMode(true);
         brushDialog.setColor(photoEditor.getBrushColor());
@@ -434,12 +485,69 @@ public class EditActivity extends AppCompatActivity {
         return bitmap;
     }
 
-    @Override
     public void onBackPressed() {
         if (isInTools) {
-            isInTools = false;
-            findViewById(R.id.tools).setVisibility(View.VISIBLE);
-            fragmentContainer.setVisibility(View.INVISIBLE);
+
+            AlertDialog dialog;
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(EditActivity.this, R.style.SaveDialog);
+            dialogBuilder.setTitle("Save Changes");
+            dialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, int which) {
+                    photoEditor.saveAsBitmap(new SaveSettings.Builder().setCompressFormat(Bitmap.CompressFormat.JPEG).setCompressQuality(100).setClearViewsEnabled(true).build(),
+                            new OnSaveBitmap() {
+                                @Override
+                                public void onBitmapReady(Bitmap saveBitmap) {
+                                    selectedFilterIndex = 0;
+                                    finalBrightness = 100;
+                                    finalContrast = 0;
+                                    finalSaturation = 100;
+                                    photoEditorView.getSource().setImageBitmap(saveBitmap);
+                                    isInTools = false;
+                                    photoEditor.clearAllViews();
+                                    photoEditor.setBrushDrawingMode(false);
+                                    findViewById(R.id.tools).setVisibility(View.VISIBLE);
+                                    fragmentContainer.setVisibility(View.INVISIBLE);
+                                    bitmap = saveBitmap;
+                                    setupFilter();
+                                    setupEffect();
+
+                                }
+
+                                @Override
+                                public void onFailure(Exception e) {
+
+                                }
+                            });
+                }
+            });
+            dialogBuilder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    isInTools = false;
+                    findViewById(R.id.tools).setVisibility(View.VISIBLE);
+                    fragmentContainer.setVisibility(View.INVISIBLE);
+                    photoEditor.clearAllViews();
+                    photoEditor.setBrushDrawingMode(false);
+                }
+            });
+
+            dialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+
+                }
+            });
+
+            dialogBuilder.setMessage("Do you want Save changes ?");
+
+            dialog = dialogBuilder.create();
+            dialog.show();
+
+
+
         } else if (isInCrop) {
             closeCropFragment();
         } else {
@@ -470,6 +578,7 @@ public class EditActivity extends AppCompatActivity {
         isInCrop = false;
         photoEditorView.setVisibility(View.VISIBLE);
         findViewById(R.id.bottombar).setVisibility(View.VISIBLE);
+        findViewById(R.id.sd).setVisibility(View.VISIBLE);
         cropContainer.setVisibility(View.INVISIBLE);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

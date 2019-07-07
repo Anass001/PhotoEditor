@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
 import com.zeneo.photoeditorpro.Adapter.FilterListAdapter;
 import com.zeneo.photoeditorpro.R;
 import com.zeneo.photoeditorpro.ThumbnailsManager;
@@ -33,6 +35,19 @@ public class FilterDialog extends BottomSheetDialogFragment {
 
     public interface OnFilterChangeListener{
         void onFilterSelected(Filter filter,int index);
+    }
+
+    public void setupSelectedFilter(List<ThumbnailItem> list ){
+
+        isSelectedList = new ArrayList<>();
+        for (int i = 0 ; i < list.size() ; i++) {
+            if(i == index)
+                isSelectedList.add(true);
+            else
+                isSelectedList.add(false);
+
+        }
+
     }
 
     private int index;
@@ -61,6 +76,7 @@ public class FilterDialog extends BottomSheetDialogFragment {
         recyclerView = view.findViewById(R.id.filters_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         bindDataToAdapter();
+        getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         return view;
     }
@@ -90,14 +106,7 @@ public class FilterDialog extends BottomSheetDialogFragment {
 
                 List<ThumbnailItem> thumbs = ThumbnailsManager.processThumbs(getContext());
 
-                isSelectedList = new ArrayList<>();
-                for (int i = 0 ; i < thumbs.size() ; i++) {
-                    if(i == index)
-                        isSelectedList.add(true);
-                    else
-                        isSelectedList.add(false);
-
-                }
+                setupSelectedFilter(thumbs);
 
                 final FilterListAdapter adapter = new FilterListAdapter(thumbs,isSelectedList,listener,getContext());
                 recyclerView.setAdapter(adapter);
@@ -118,47 +127,6 @@ public class FilterDialog extends BottomSheetDialogFragment {
         };
         handler.post(r);
     }
-
-
-    public static class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
-
-        private OnItemClickListener mListener;
-
-        public interface OnItemClickListener {
-
-            public void onItemClick(View view, int position);
-
-        }
-
-
-        GestureDetector mGestureDetector;
-
-        public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
-            mListener = listener;
-            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-                @Override public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-            });
-        }
-
-        @Override public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
-
-            View childView = view.findChildViewUnder(e.getX(), e.getY());
-
-            if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
-                mListener.onItemClick(childView, view.getChildPosition(childView));
-                return true;
-            }
-
-            return false;
-        }
-
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) { }
-        @Override public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) { }
-    }
-
 
 
 }

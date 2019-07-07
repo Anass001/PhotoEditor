@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".AboutActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/about_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="20dp">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/app_logo"
+            android:layout_marginRight="10dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="P Photo Editor"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:text="Version 1.0"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left
+"
+                android:textColor="#007bff"
+                android:textSize="16sp"
+                android:onClick="onGoToStore"
+                android:text="Zeneo"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <TextView
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:layout_width="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/grey"
+        android:layout_height="wrap_content"
+        android:text="@string/about_text"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingRight="30dp"
+        android:layout_gravity="left"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="25dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_black_24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#007bff"
+            android:layout_height="wrap_content"
+            android:onClick="onRateApp"
+            android:text="Rate App"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingRight="30dp"
+        android:paddingBottom="5dp"
+        android:layout_gravity="left
+"
+        android:paddingLeft="30dp"
+        android:paddingTop="5dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_open_in_new_black_24dp"/>
+        <TextView
+            android:textColor="#007bff"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:onClick="onGoToStore"
+            android:layout_height="wrap_content"
+            android:text="Other Apps"/>
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="Credits"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Icons made by:"
+                    android:textColor="#000"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/credits_icons"
+                    android:layout_marginLeft="28dp"
+                    android:textColor="@color/grey"
+                    android:textColorLink="#007bff"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fonts:"
+                android:textColor="#000"
+                android:layout_marginLeft="30dp"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/credits_fonts"
+                    android:layout_marginLeft="28dp"
+                    android:textColor="@color/grey"
+                    android:textColorLink="#007bff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stickers made by:"
+                    android:textColor="#000"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/credits_stickers"
+                    android:layout_marginLeft="28dp"
+                    android:textColor="@color/grey"
+                    android:textColorLink="#007bff"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

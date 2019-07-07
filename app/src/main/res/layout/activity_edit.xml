@@ -17,7 +17,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" >
 
     </android.support.v7.widget.Toolbar>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -48,10 +48,13 @@
 
     </FrameLayout>
 
+
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="7dp"
+        android:layout_height="5dp"
         android:layout_above="@id/bottombar"
+        android:id="@+id/sd"
         android:background="@drawable/simple_shadow"/>
 
 
@@ -205,11 +208,6 @@
 
 
     </FrameLayout>
-
-
-
-
-
 
 
 </RelativeLayout>

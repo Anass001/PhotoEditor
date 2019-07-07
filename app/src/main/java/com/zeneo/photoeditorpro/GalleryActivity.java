@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
-
 import com.mlsdev.animatedrv.AnimatedRecyclerView;
 import com.zeneo.photoeditorpro.Adapter.ImagesListAdapter;
 import com.zeneo.photoeditorpro.Model.Image;
