@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "590333593265",
+    "firebase_url": "https://photo-editor-1f340.firebaseio.com",
+    "project_id": "photo-editor-1f340",
+    "storage_bucket": "photo-editor-1f340.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590333593265:android:75d135c7cfa8789d",
+        "android_client_info": {
+          "package_name": "com.zeneo.photoeditorpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590333593265-mtjkhels79b4j4r1ntgbgfepg2tgd5t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA66t_Z3os1eytqjZuvM64nmjeYLQZDyNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590333593265-mtjkhels79b4j4r1ntgbgfepg2tgd5t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

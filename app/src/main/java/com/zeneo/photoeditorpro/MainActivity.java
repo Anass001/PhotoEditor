@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
@@ -52,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.MAIN_AD_UNIT_ID));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                1);
 
         LinearLayout gal_lt = findViewById(R.id.gal_lt);
         gal_lt.setOnClickListener(new View.OnClickListener() {
@@ -85,11 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 }
-//                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
-//                Intent i = new Intent(Intent.ACTION_VIEW);
-//                i.setData(Uri.parse(url));
-//                startActivity(i);
-
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
@@ -100,11 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 }
-//                String url = "https://play.google.com/store/apps/developer?id=Zeneo";
-//                Intent i = new Intent(Intent.ACTION_VIEW);
-//                i.setData(Uri.parse(url));
-//                startActivity(i);
-
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
@@ -114,12 +107,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener camClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
                 dispatchTakePictureIntent();
-//                Toast.makeText(MainActivity.this, "Camera", Toast.LENGTH_LONG).show();
-
             }
         };
 
@@ -128,13 +116,32 @@ public class MainActivity extends AppCompatActivity {
 
         linkIconsView();
         setupFonts();
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    150);
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
-
     }
 
     public void setupFonts(){
@@ -145,11 +152,9 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.cam_txt)).setTypeface(typeface);
         ((TextView)findViewById(R.id.more_txt)).setTypeface(typeface);
         ((TextView)findViewById(R.id.gal_txt)).setTypeface(typeface);
-//        ((TextView)findViewById(R.id.title)).setTypeface(typeface2);
     }
 
     public void linkIconsView (){
-
         ImageView gal = findViewById(R.id.gal_img);
         ImageView cam = findViewById(R.id.cam_img);
         ImageView more = findViewById(R.id.more_img);
@@ -157,15 +162,12 @@ public class MainActivity extends AppCompatActivity {
         setupIcons(gal);
         setupIcons(cam);
         setupIcons(more);
-
     }
 
 
     public void setupIcons(ImageView imageView ){
-
         Bitmap bitmap = getBitmapFromDrawable(imageView.getDrawable());
         imageView.setImageBitmap(addGradient(bitmap));
-
     }
 
     @NonNull
@@ -182,9 +184,7 @@ public class MainActivity extends AppCompatActivity {
         int height = originalBitmap.getHeight();
         Bitmap updatedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(updatedBitmap);
-
         canvas.drawBitmap(originalBitmap, 0, 0, null);
-
         Paint paint = new Paint();
         LinearGradient shader = new LinearGradient(0, 0, 0, height, 0xFF8F4CA4, 0xFF574CB1, Shader.TileMode.CLAMP);
         paint.setShader(shader);
@@ -217,8 +217,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IllegalArgumentException exception){
                 exception.printStackTrace();
             }
-
-
         }
     }
 
@@ -246,6 +244,4 @@ public class MainActivity extends AppCompatActivity {
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
-
 }

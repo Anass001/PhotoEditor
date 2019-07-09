@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zeneo.photoeditorpro"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,4 +39,8 @@ dependencies {
     implementation 'info.androidhive:imagefilters:1.0.7'
     implementation 'com.github.yalantis:ucrop:2.2.3'
     implementation 'com.google.android.gms:play-services-ads:17.2.1'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
