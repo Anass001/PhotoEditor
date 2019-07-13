@@ -104,6 +104,18 @@ public class StrickersDialog extends BottomSheetDialogFragment {
                 stickersList.clear();
                 listAssetsFiles("love");
 
+            } else if (category.equals("Face")){
+                stickersList.clear();
+                listAssetsFiles("face");
+
+            } else if (category.equals("Kawaii")){
+                stickersList.clear();
+                listAssetsFiles("kawaii");
+
+            } else if (category.equals("Vaporwave")){
+                stickersList.clear();
+                listAssetsFiles("vaporwave");
+
             }
 //            else if (category.equals("Tab5")){
 //                stickersList.clear();
